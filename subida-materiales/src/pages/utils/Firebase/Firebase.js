@@ -12,10 +12,11 @@ const firebaseConfig = {
 	measurementId: "G-JET91L9BBS"
 }
 
-const app  = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth()
-const db   = firebase.storage()
+const app     = firebase.initializeApp(firebaseConfig)
+const auth    = firebase.auth()
+const storage = firebase.storage()
+const db      = firebase.firestore()
 
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 
-export { auth, db, firebase }
+export { app, auth, storage, db, firebase }

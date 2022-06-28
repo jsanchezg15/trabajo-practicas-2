@@ -52,9 +52,13 @@ const HtmlParser = () => {
 				}
 			})
 
-			await addImages(data, questions)
 
 			setUrl(myUrl)
+
+			console.log({description, questions, title})
+
+			await db.collection("tests").add({json: JSON.stringify({description, questions, title})})
+
 			convertHTML({description, questions, title})
 		}	
 		catch(e) {
@@ -228,11 +232,11 @@ const HtmlParser = () => {
 			html += '\t\t<legend for="' + elem.label + '" className="' + classNames.legendClass + '">' + num++ + '. ' + elem.legend + '</legend>\n'
 
 			// Add image links
-			if(elem.imageURL != "null") {
+			/*if(elem.imageURL != "null" && elem.imageURL != "undefined") {
 				html += '\t\t<div>\n'
 				html += '\t\t\t<img src={"' + elem.imageURL + '"} alt="boohoo" className="image"/>\n'
 				html += '\t\t</div>\n'
-			}
+			}*/
 
 			html += '\t\t<div class="form-group">\n'
 

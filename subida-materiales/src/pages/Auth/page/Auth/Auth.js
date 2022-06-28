@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import AuthOptions from "../../components/Auth/AuthOptions"
 
 // components of login

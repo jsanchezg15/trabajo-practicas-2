@@ -1,1 +1,1 @@
-export {default} from "./Hamburgesa";
+export { default } from "./Hamburgesa"

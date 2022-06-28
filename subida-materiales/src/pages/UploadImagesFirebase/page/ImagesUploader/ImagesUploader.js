@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { Input, Button, Grid } from "semantic-ui-react"
 import { chunk } from 'lodash'
-import { db } from '../../../utils/Firebase'
+import { storage } from '../../../utils/Firebase'
 
 // Styles
 import './ImagesUploader.scss'
@@ -57,8 +57,8 @@ const ImagesUploader = () => {
 
 	const postImage = async (image, ref) => {
 		try {
-			const uploadTask = await db.ref(ref + image.id).put(image, {contentType: image.mimetype})
-			const imageURL   = await db.ref(ref + image.id).getDownloadURL()
+			const uploadTask = await storage.ref(ref + image.id).put(image, {contentType: image.mimetype})
+			const imageURL   = await storage.ref(ref + image.id).getDownloadURL()
 
 			setProgress(100 * ++uploadedImages / images.length)
 
