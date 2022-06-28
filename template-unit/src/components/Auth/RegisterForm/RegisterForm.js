@@ -5,15 +5,15 @@ import { validateEmail } from "../../../utils/Validations"
 import { toast } from "react-toastify"
 import "./RegisterForm.scss"
 
-const db = firebase.firestore(firebase)
 
 export default function RegisterForm(props) {
+
 	const { setSelectedForm } = props
 
-	const [formData, setFormData]         = useState({ email: "", password: "", username: "" })
+	const [formData,     setFormData]     = useState({ email: "", password: "", username: "" })
 	const [showPassword, setShowPassword] = useState(false)
-	const [formError, setFormError]       = useState({})
-	const [isLoading, setIsLoading]       = useState(false)
+	const [formError,    setFormError]    = useState({})
+	const [isLoading,    setIsLoading]    = useState(false)
 
 	const handlerShowPassword = () => {
 		setShowPassword(!showPassword)
@@ -99,11 +99,8 @@ export default function RegisterForm(props) {
 						icon="mail outline"
 						error={formError.email}
 					/>
-					{formError.email && (
-						<span className="error-text">
-							Please introduce a valid mail.
-						</span>
-					)}
+					
+					{formError.email && <span className="error-text">   Please introduce a valid mail.   </span>}
 				</Form.Field>
 				
 				<Form.Field>
@@ -120,11 +117,8 @@ export default function RegisterForm(props) {
 							/>
 						}
 					/>
-					{formError.password && 
-						<span className="error-text">
-							Please introduce a password greater than 5 characters.
-						</span>
-					}
+
+					{formError.password && <span className="error-text">   Please introduce a password greater than 5 characters.   </span>}
 				</Form.Field>
 				
 				<Form.Field>
@@ -135,11 +129,8 @@ export default function RegisterForm(props) {
 						icon="user circle outline"
 						error={formError.username}
 					/>
-					{formError.password && (
-						<span className="error-text">
-							Please introduce a username.
-						</span>
-					)}
+					
+					{formError.password && <span className="error-text">   Please introduce a username.   </span>}
 				</Form.Field>
 			
 				<Button type="submit" loading={isLoading}>
