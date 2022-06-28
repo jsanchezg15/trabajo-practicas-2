@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // Components
 import { auth } from './pages/utils/Firebase'
 import Routes from './Routes'
+import CreateUnit from './layouts/CreateUnit'
 
 const App = () => {
 
@@ -17,7 +18,8 @@ const App = () => {
 
 	return (
 		<div className="App">
-			<Routes user={user}/>
+			{false && <Routes user={user}/>}
+			<CreateUnit/>
 		</div>
 	)
 }
