@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Icon, Form, Input } from "semantic-ui-react"
-import firebase from "../../../utils/Firebase"
-import "firebase/auth"
-import 'firebase/firestore'
+import { auth } from "../../../utils/Firebase"
 import { validateEmail } from "../../../utils/Validations"
 import { toast } from "react-toastify"
 import "./RegisterForm.scss"
@@ -48,8 +46,7 @@ export default function RegisterForm(props) {
 		if(formOk) {
 			setIsLoading(true)
 
-			firebase
-			.auth()
+			auth
 			.createUserWithEmailAndPassword(formData.email, formData.password)
 			.then(() => {
 				changeUserName()
@@ -66,8 +63,7 @@ export default function RegisterForm(props) {
 	}
 
 	const changeUserName = () => {
-		firebase
-		.auth()
+		auth
 		.currentUser
 		.updateProfile({
 			displayName: formData.username
@@ -78,8 +74,7 @@ export default function RegisterForm(props) {
 	}
 
 	const sendVerificationEmail = () => {
-		firebase
-		.auth()
+		auth
 		.currentUser
 		.sendEmailVerification()
 		.then(() => {

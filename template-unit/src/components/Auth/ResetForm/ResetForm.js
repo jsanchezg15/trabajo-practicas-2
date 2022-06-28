@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import { Button, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
 import { validateEmail } from "../../../utils/Validations"
-import firebase from "../../../utils/Firebase"
-import "firebase/auth"
+import { auth } from "../../../utils/Firebase"
 
 import "./ResetForm.scss"
 
@@ -36,7 +35,7 @@ const LoginForm = (props) => {
 		if(formOk) {
 			setIsLoading(true)
 
-			firebase.auth().sendPasswordResetEmail(formData.email)
+			auth.sendPasswordResetEmail(formData.email)
 			.then(() => {
 				toast.success("Email sent")
 			})

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from "react-router-dom"
 import Routes from "../../routes/Routes"
-import Hamburgesa from '../../Components/Hamburgesa'
+import Hamburgesa from '../../components/Hamburgesa'
 
 import "./LoggedLayout.scss"
 

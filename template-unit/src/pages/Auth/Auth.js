@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import AuthOptions from "../../Components/Auth/AuthOptions"
+import AuthOptions from "../../components/Auth/AuthOptions"
 
 // Components of login
-import LoginForm      from "../../Components/Auth/LoginForm"
-import RegisterForm   from "../../Components/Auth/RegisterForm"
-import ResetForm      from "../../Components/Auth/ResetForm"
+import LoginForm      from "../../components/Auth/LoginForm"
+import RegisterForm   from "../../components/Auth/RegisterForm"
+import ResetForm      from "../../components/Auth/ResetForm"
 import BackgroundAuth from "../../assets/jpg/background-auth.jpg"
 import LogoNameWhite  from "../../assets/png/logo-name-white.png"
 

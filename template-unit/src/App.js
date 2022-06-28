@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { ToastContainer } from "react-toastify"
 
-import firebase from './utils/Firebase'
-import "firebase/auth"
+import { auth } from './utils/Firebase'
 import Auth from "./pages/Auth"
 import LoggedLayout from "./layouts/LoggedLayout"
 
@@ -13,10 +12,10 @@ const App = () => {
 	const [reloadApp, setReloadApp] = useState(false)
 	const [course,    setCourse]    = useState(getSampleCourse())
 
-	firebase.auth().onAuthStateChanged(currentUser => {
+	auth.onAuthStateChanged(currentUser => {
 	
 		if(!currentUser?.emailVerified) {
-			firebase.auth().signOut()
+			auth.signOut()
 			setUser(null)
 		}
 		else 

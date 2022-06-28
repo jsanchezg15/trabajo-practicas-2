@@ -7,7 +7,7 @@ import Videos from '../pages/Videos/Videos'
 
 export default function Routes(props) {
 
-	const { user, setReloadApp, myclass, idclass, classname, teachername, teacherid, course } = props
+	const { user, course } = props
 
 	return (
 		<Switch>

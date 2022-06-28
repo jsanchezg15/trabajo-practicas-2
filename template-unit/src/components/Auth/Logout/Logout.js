@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from "semantic-ui-react"
-import firebase from "../../../utils/Firebase"
-import "firebase/auth"
+import { auth } from "../../../utils/Firebase"
 
 import "./Logout.scss"
 
@@ -10,7 +9,7 @@ const Logout = (props) => {
 	const { setShowoglout } = props
 
 	const logOut = () =>{ 
-		firebase.auth().signOut()
+		auth.signOut()
 	}
 
 	const cancel = () =>{

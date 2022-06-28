@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
 import { validateEmail } from "../../../utils/Validations"
-import firebase from "../../../utils/Firebase"
-import "firebase/auth"
+import { auth } from "../../../utils/Firebase"
 
 import "./LoginForm.scss"
 
@@ -47,8 +46,7 @@ const LoginForm = (props) => {
 		if(formOk) {
 			setIsLoading(true)
 			
-			firebase
-			.auth()
+			auth
 			.signInWithEmailAndPassword(formData.email, formData.password)
 			.then(response => {
 				setUser(response.user)

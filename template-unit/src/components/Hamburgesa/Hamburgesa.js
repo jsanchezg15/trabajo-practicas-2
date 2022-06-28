@@ -1,7 +1,6 @@
 import React from 'react'
 import { Nav, Navbar } from "react-bootstrap"
-import firebase from "../../utils/Firebase"
-import "firebase/auth"
+import { auth } from "../../utils/Firebase"
 import "bootstrap/dist/css/bootstrap.min.css"
 import './Hamburgesa.scss'
 
@@ -10,7 +9,7 @@ const Hamburgesa = (props) => {
 	const { course } = props
 
 	const logOut = () => {
-		firebase.auth().signOut()
+		auth.signOut()
 	}
 
 	console.log(course)

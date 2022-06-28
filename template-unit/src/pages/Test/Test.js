@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Container } from "semantic-ui-react"
 import { toast } from "react-toastify"
-import firebase from "../../utils/Firebase"
+import { db } from "../../utils/Firebase"
 import Qs from "qs"
 
 import './Test.scss'
-
-const db = firebase.firestore(firebase)
 
 const Test = (props) => {
 
