@@ -37,9 +37,11 @@ export default function Routes(props) {
 				)
 			}
   
-			<Route path='/Videos' exact>
-				<Videos/> 
-			</Route>   
+  			{course && course.videos &&
+				<Route path='/videos' exact>
+					<Videos data={course.videos}/>
+				</Route>
+			}
 		</Switch>
 	)
 }

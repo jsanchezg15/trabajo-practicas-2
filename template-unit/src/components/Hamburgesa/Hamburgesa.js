@@ -12,8 +12,6 @@ const Hamburgesa = (props) => {
 		auth.signOut()
 	}
 
-	console.log(course)
-
 	return (
 		<Navbar collapseOnSelect expand={false} bg="dark" variant="dark">
 			
@@ -32,7 +30,10 @@ const Hamburgesa = (props) => {
 						course.tests.map((test, index) => <Nav.Link href={"/test/" + index}>{test.title}</Nav.Link>)
 					}
 					
-					<Nav.Link href="/Videos">Videos</Nav.Link>
+					{course && course.videos && 
+						<Nav.Link href="/videos">Videos</Nav.Link>
+					}
+
 					<Nav.Link onClick={logOut}>Close session</Nav.Link>
 				</Nav>
 			</Navbar.Collapse>

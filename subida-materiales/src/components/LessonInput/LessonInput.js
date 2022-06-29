@@ -35,6 +35,16 @@ const LessonInput = (props) => {
 		}
 	}
 
+	const deletePdf = e => {
+		
+		const obj = {
+			...data,
+			filePDF: ""
+		}
+
+		setData(obj)
+	}
+
 	useEffect(() => {
 		
 		const obj = {
@@ -60,9 +70,22 @@ const LessonInput = (props) => {
 					placeholder="Título"
 				/>
 
-				{!addPDF && <Button onClick={() => setAddPDF(true)}>Añadir PDF</Button>}
+				{!addPDF && 
+					<Button onClick={() => {
+						setAddPDF(true)
+					}}>
+						Añadir PDF
+					</Button>
+				}
 
-				{addPDF  && <Button onClick={() => setAddPDF(false)}>Borrar PDF</Button>}
+				{addPDF  && 
+					<Button onClick={() => {
+						setAddPDF(false)
+						deletePdf()
+					}}>
+						Borrar PDF
+					</Button>
+				}
 
 			</div>
 

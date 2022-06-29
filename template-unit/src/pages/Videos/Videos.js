@@ -3,11 +3,11 @@ import { Embed, Dropdown } from 'semantic-ui-react'
 
 import "./Videos.scss";
 
-const videose = [
-	{ key: 'af', value: 'vOEro_vgUH0', text: 'Las aficiones de mis compañeros' },
-]
 
-export default function Videos() {
+
+const Videos = (props) => {
+
+	const { data } = props
 
 	const [formData, setformData] = useState(initialValueForm())
 
@@ -34,7 +34,7 @@ export default function Videos() {
 						search
 						selection
 						lazyLoad
-						options={videose}
+						options={data}
 						onChange={(e,data) => setformData({...formData, id: data.value})}
 						className="listado-videos" 
 					/>
@@ -50,3 +50,4 @@ function initialValueForm() {
 	}
 }
 
+export default Videos

@@ -15,9 +15,9 @@ import "./CreateUnit.scss"
 
 const CreateUnit = (props) => {
 
-	const [lessons,   setLessons] = useState([])
-	const [tests,     setTests]   = useState([])
-	const [videos,    setVideos]  = useState([])
+	const [lessons, setLessons] = useState([])
+	const [tests,   setTests]   = useState([])
+	const [videos,  setVideos]  = useState([])
 
 	const onChange = e => {
 
@@ -33,8 +33,10 @@ const CreateUnit = (props) => {
 		console.log(tests)
 		console.log(videos)
 
-		await uploadImages()
+		await uploadLessons()
 		await uploadTests()
+
+		parseVideos()
 
 		const myLessons = lessons.map(lesson => {
 			return {
@@ -53,7 +55,13 @@ const CreateUnit = (props) => {
 			}
 		})
 
-		const myVideos = []
+		const myVideos = videos.map(video => {
+			return {
+				key: 'af',
+				value: video.id,
+				text: video.title
+			}
+		})
 
 		const myUnit = {
 			title: "General Spanish U1",
@@ -68,6 +76,19 @@ const CreateUnit = (props) => {
 	}
 
 
+	const parseVideos = () => {
+
+		const youtube_parser = (url) => {
+			var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+			var match = url.match(regExp);
+			return (match&&match[7].length==11)? match[7] : false;
+		}
+
+		videos.forEach(video => 
+			video.id = youtube_parser(video.link)
+		)
+	}
+
 	const uploadTests = async () => {
 
 		try {
@@ -80,7 +101,7 @@ const CreateUnit = (props) => {
 		}
 	}
 
-	const uploadImages = async (title) => {
+	const uploadLessons = async (title) => {
 		
 		try {
 			const ref = (title || "noReference") + "/"
@@ -94,7 +115,6 @@ const CreateUnit = (props) => {
 		}
 	}
 
-
 	const postLessonImages = async (lesson, ref) => {
 		
 		try {
@@ -107,16 +127,25 @@ const CreateUnit = (props) => {
 			if(lesson.urls.includes(""))
 				throw "Some images have not been uploaded correctly"
 
+			
+			if(lesson.filePDF && lesson.filePDF != "") {
+				
+				const id = uuidv4()
+
+				const uploadTask = await storage.ref(ref + "/" + lesson.title + "/" + id).put(lesson.filePDF, {contentType: lesson.filePDF.mimetype})
+				const reference  = await storage.ref(ref + "/" + lesson.title + "/" + id).getDownloadURL()
+		
+				if( !reference.includes("https://firebasestorage.googleapis.com") ) 
+					throw {message: "ERROR: The url is not correct..."}
+				
+				lesson.pdfURL = reference
+			}
+
+
 			toast.info(lesson.title + " files uploaded correctly")
 		}
 		catch(err) {
 			toast.error(err)
-		}
-		finally {
-			console.log(lessons)
-			//setImages([])
-			//setSearching(false)
-			//setProgress(0)
 		}
 	}
 
@@ -124,8 +153,6 @@ const CreateUnit = (props) => {
 		try {
 			const uploadTask = await storage.ref(ref + image.id).put(image, {contentType: image.mimetype})
 			const imageURL   = await storage.ref(ref + image.id).getDownloadURL()
-
-			//setProgress(100 * ++uploadedImages / images.length)
 
 			if( !imageURL.includes("https://firebasestorage.googleapis.com") ) 
 				throw {message: "ERROR: The url is not correct..."}
@@ -136,6 +163,7 @@ const CreateUnit = (props) => {
 			console.log(e.message || "Error uploading image")
 		}
 	}
+
 
 	const addLesson = () => {
 
