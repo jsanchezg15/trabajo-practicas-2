@@ -2,34 +2,27 @@ import React, { useState } from "react"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
 import MyDropzone from "../../pages/UploadImagesFirebase/page/MyDropzone"
-import { v4 as uuidv4 } from 'uuid'
 
 import "./LessonInput.scss"
 
 const LessonInput = (props) => {
 	
-	const [formData,     setFormData]  = useState({})
-	const [formError,    setFormError] = useState({})
-	const [addPDF   ,    setAddPDF]    = useState(false)
+	const { data, setData } = props
+
+	const [addPDF, setAddPDF] = useState(false)
 
 
 	const onChange = e => {
+		
 		const obj = {
-			...formData,
+			...data,
 			[e.target.name]: e.target.value
 		}
 
 		console.log(obj)
-		setFormData(obj)
+		setData(obj)
 	}
 
-	const onSubmit = () => {
-		
-	}
-
-	const onInputFiles = () => {
-		
-	}
 
 	return (	
 		<div className="main-lesson">
@@ -38,8 +31,9 @@ const LessonInput = (props) => {
 
 				<Input
 					type="text"
-					name="Title"
-					default="Lesson "
+					name="title"
+					value={data.title || ""}
+					onChange={e => onChange(e)}
 					placeholder="Título"
 				/>
 
@@ -54,9 +48,9 @@ const LessonInput = (props) => {
 				<div className="pdf-input">
 					<Input
 						type="file"
-						name="pdf"
+						name="pdfURL"
 						placeholder="PDF File"
-						onInput={(e) => onInputFiles(e)}
+						onInput={(e) => console.log(e)}
 						icon="file"
 					/>
 				</div>

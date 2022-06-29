@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 // Components
-import MainMenu from '../pages/MainMenu/page/MainMenu'
+import CreateUnit from '../layouts/CreateUnit'
 import Auth from '../pages/Auth/page/Auth/Auth'
 
 const MyRouter = (props) => {
@@ -18,7 +18,7 @@ const MyRouter = (props) => {
 		<BrowserRouter>
 			{
 				user ? 
-					<Redirect to="/menu"/> 
+					<Redirect to="/unit-creator"/> 
 				: 
 					<Redirect to="/auth"/>
 			}
@@ -27,8 +27,8 @@ const MyRouter = (props) => {
 				<Route path="/auth">
 					<Auth/>
 				</Route>
-				<Route path="/menu">
-					<MainMenu/>
+				<Route path="/unit-creator">
+					<CreateUnit/>
 				</Route>
 			</Switch>
 		</BrowserRouter>

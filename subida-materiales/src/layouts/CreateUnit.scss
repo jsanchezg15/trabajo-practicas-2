@@ -1,22 +1,21 @@
 @import "../scss/index.scss";
 
-* {
-	//border: 1px solid red;
-}
-
 .main {
 	margin-top: 50px;
 
 	.container {
 		width: 800px;
 		height: fit-content;
-		border: 2px solid $border-grey-light;
+		//border: 2px solid $border-grey-light;
 
 		display: flex;
 		flex-direction: column;
 		
 		h1 {
+			width: 700px;
 			color: white;
+			display: flex;
+			justify-content: center;
 		}
 
 		.inline-inputs {
@@ -36,46 +35,32 @@
 				}
 			}
 		}
-
-		.buttons {
-
+	
+		.add-button {
+			width: 700px;
 			display: flex;
-			direction: row;
-	
-			.add-button {
-				.ui.button {
-					text-transform: uppercase;
-					width: 100px;
-					border-radius: 50px;
-					font-size: 17px;
-					letter-spacing: 3px;
-					color: white;
-					background-color: $primary-color-orange;
-				}
+			justify-content: center;
+
+			.ui.button {
+				text-transform: uppercase;
+				width: 250px;
+				border-radius: 50px;
+				font-size: 17px;
+				letter-spacing: 3px;
+				color: white;
+				background-color: $primary-color-cyan;
 			}
+		}
 	
-			.delete-button {
-				.ui.button {
-					text-transform: uppercase;
-					width: 100px;
-					border-radius: 50px;
-					font-size: 17px;
-					letter-spacing: 3px;
-					color: white;
-					background-color: $danger;
-				}
-			}
-	
-			.submit-button {
-				.ui.button {
-					text-transform: uppercase;
-					width: 100px;
-					border-radius: 50px;
-					font-size: 17px;
-					letter-spacing: 3px;
-					color: white;
-					background-color: $primary-color-orange-dark;
-				}
+		.submit-button {
+			.ui.button {
+				text-transform: uppercase;
+				width: 100px;
+				border-radius: 50px;
+				font-size: 17px;
+				letter-spacing: 3px;
+				color: white;
+				background-color: $primary-color-orange-dark;
 			}
 		}
 	}

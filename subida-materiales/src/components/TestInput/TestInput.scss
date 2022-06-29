@@ -54,6 +54,18 @@
 		}
 	}
 
+	.title-input {
+		margin: 10px;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		.ui.input {
+			width: 95%;
+		}
+	}
+
 	.form-input {
 		margin: 10px;
 		width: 100%;

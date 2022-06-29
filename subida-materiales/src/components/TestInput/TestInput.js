@@ -1,42 +1,43 @@
-import React, { useState } from "react"
-import { Button, Icon, Form, Input } from "semantic-ui-react"
-import { toast } from "react-toastify"
-import MyDropzone from "../../pages/UploadImagesFirebase/page/MyDropzone"
-import { v4 as uuidv4 } from 'uuid'
+import React from "react"
+import { Input } from "semantic-ui-react"
 
 import "./TestInput.scss"
 
 const TestInput = (props) => {
 	
+	const { data, setData } = props
 
-	const onSubmit = () => {
+
+	const onChange = e => {
 		
+		const obj = {
+			...data,
+			[e.target.name]: e.target.value
+		}
+
+		console.log(obj)
+		setData(obj)
 	}
 
-	const deleteTest = () => {
-		
-	}
 
 	return (
 		<div className="main-test">
 
-			<div className="inline">
+			<div className="title-input">
 
 				<Input
 					type="text"
-					name="Title"
-					default="Test Title"
+					name="title"
+					value={data.title}
 					placeholder="Título"
 				/>
-
-				<Button onClick={() => deleteTest()}>Borrar Test</Button>
-
 			</div>
 
 			<div className="form-input">
 				<Input
 					type="text"
 					name="formURL"
+					value={data.formURL}
 					placeholder="form url"
 					icon="linkify"
 				/>
@@ -46,6 +47,7 @@ const TestInput = (props) => {
 				<Input
 					type="text"
 					name="spreadsheetURL"
+					value={data.spreadsheetURL}
 					placeholder="spreadsheet url"
 					icon="file excel outline"
 				/>
