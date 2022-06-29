@@ -15,10 +15,11 @@ import "./CreateUnit.scss"
 
 const CreateUnit = (props) => {
 
-	const [title,   setTitle]   = useState("General Spanish Unit 1")
-	const [lessons, setLessons] = useState([])
-	const [tests,   setTests]   = useState([])
-	const [videos,  setVideos]  = useState([])
+	const [title,   setTitle]   = useState("")
+	const [lessons, setLessons] = useState([{title: "Lesson 1"}])
+	const [tests,   setTests]   = useState([{title: "Test 1"}])
+	const [videos,  setVideos]  = useState([{title: "Video 1"}])
+	const [page,    setPage]    = useState(0)
 
 	const upload = async () => {
 
@@ -70,12 +71,18 @@ const CreateUnit = (props) => {
 		const id  = uuidv4()
 
 		await db.collection("courses").add({
-			id: id,
+			id:    id,
 			title: title,
-			str: str
+			str:   str
 		})
 
 		toast.success("¡Materiales subidos!")
+
+		setTitle("")
+		setLessons([{title: "Lesson 1"}])
+		setTests([{title: "Test 1"}])
+		setVideos([{title: "Video 1"}])
+		setPage(0)
 	}
 
 
@@ -84,46 +91,46 @@ const CreateUnit = (props) => {
 		try {
 			
 			if(!title || title == "")
-				throw "Please introduce a title for the course"
+				throw "Por favor, introduce el título de la unidad"
 
 			lessons.forEach(lesson => {
 				if(!lesson.title || lesson.title == "")
-					throw "Please introduce a title every lesson"
+					throw "Por favor, introduce los títulos de cada lección"
 			})
 
 			lessons.forEach(lesson => {
 				if(!lesson.files || lesson.files.length == 0)
-					throw "Please introduce the images for lesson named '" + lesson.title + "'"
+					throw 'Por favor, introduce las imágenes de la lección "' + lesson.title + '"'
 			})
 
 			tests.forEach(test => {
 				if(!test.title || test.title == "")
-					throw "Please introduce a title for every test"
+					throw "Por favor, introduce los títulos de cada test"
 			})
 
 			tests.forEach(test => {
 				if(!test.formURL || test.formURL == "")
-					throw "Please introduce the form URL for test named '" + test.title + "'"
+					throw 'Por favor, introduce la URL del Google Form "' + test.title + '"'
 			})
 
 			tests.forEach(test => {
 				if(!test.spreadsheetURL || test.spreadsheetURL == "")
-					throw "Please introduce the spreadsheet URL for test named '" + test.title + "'"
+					throw 'Por favor, introduce la URL del Google Sheet "' + test.title + '"'
 			})
 
 			videos.forEach(video => {
 				if(!video.title || video.title == "")
-					throw "Please introduce a title for every video"
+					throw "Por favor, introduce los títulos de cada vídeo"
 			})
 
 			videos.forEach(video => {
 				if(!video.link || video.link == "")
-					throw "Please introduce the link for video named '" + video.title + "'"
+					throw 'Por favor, introduce la URL del video "' + video.title + '"'
 			})
 
 			videos.forEach(video => {
 				if(!validateYouTubeUrl(video.link))
-					throw "Please introduce a YouTube link for video named '" + video.title + "'"
+					throw 'Por favor, introduce el enlace a Youtube del vídeo  "' + video.title + '"'
 			})
 
 			return true
@@ -310,10 +317,18 @@ const CreateUnit = (props) => {
 		setVideos(copy)
 	}
 
+	const prevPage = () => {
+		setPage((page == 0) ? 0 : (page - 1))
+	}
+
+	const nextPage = () => {
+		setPage((page == 3) ? 3 : (page + 1))
+	}
+
 	return (
 		<div className="main">
 			
-			<div className="container">
+			{page == 0 && <div className="container">
 				
 				<h1>Lecciones</h1>
 
@@ -329,13 +344,9 @@ const CreateUnit = (props) => {
 						</div>
 					</div>
 				)}
-					
-				<div className="add-button">
-					<Button onClick={addLesson}>Añadir Lección</Button>
-				</div>
-			</div>
+			</div>}
 
-			<div className="container">
+			{page == 1 && <div className="container">
 				
 				<h1>Tests</h1>
 
@@ -351,14 +362,9 @@ const CreateUnit = (props) => {
 						</div>
 					</div>
 				)}
-				
-				<div className="add-button">
-					<Button onClick={addTest}>Añadir Test</Button>
-				</div>
+			</div>}
 
-			</div>
-
-			<div className="container">
+			{page == 2 && <div className="container">
 				
 				<h1>Videos</h1>
 
@@ -374,14 +380,58 @@ const CreateUnit = (props) => {
 						</div>
 					</div>
 				)}
+			</div>}
+
+			{page == 3 && <div className="container">
 				
-				<div className="add-button">
-					<Button onClick={addVideos}>Añadir Video</Button>
+				<h1>Introduce el título y finaliza</h1>
+
+				<div className="main-title-input">
+					<Input
+						type="text"
+						name="title"
+						value={title}
+						onChange={e => setTitle(e.target.value)}
+						placeholder="Título"
+					/>
+				</div>
+			</div>}
+
+			<div className="container">
+				
+				<div className="my-buttons">
+				
+					{page == 0 && <div className="void"></div>}
+
+					{page != 0 && <div className="prev-button">
+						<Button display={"block"} icon="arrow left" onClick={prevPage}></Button>
+					</div>}
+
+					{page == 0 && <div className="add-button">
+						<Button onClick={addLesson}>Añadir Lección</Button>
+					</div>}
+
+					{page == 1 && <div className="add-button">
+						<Button onClick={addTest}>Añadir Test</Button>
+					</div>}
+
+					{page == 2 && <div className="add-button">
+						<Button onClick={addVideos}>Añadir Video</Button>
+					</div>}
+
+					{page == 3 && <div className="add-button">
+						<Button onClick={upload}>Subir ya</Button>
+					</div>}
+
+					{page != 3 && <div className="next-button">
+						<Button icon="arrow right" onClick={nextPage}></Button>
+					</div>}
+
+					{page == 3 && <div className="void"></div>}
 				</div>
 
 			</div>
 
-			<Button onClick={upload}>Upload</Button>
 		</div>
 	)
 }
