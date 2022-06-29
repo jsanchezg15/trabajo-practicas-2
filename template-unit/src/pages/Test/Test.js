@@ -8,13 +8,11 @@ import './Test.scss'
 
 const Test = (props) => {
 
-	const { user, testStr, answerLink, responseURL } = props
+	const { user, testObj, answerLink, responseURL } = props
 
 	const [formData,    setformData]    = useState("")
 	const [waiting,     setWaiting]     = useState(false)
 	const [isLoading,   setIsLoading]   = useState(false)
-
-	const obj = JSON.parse(testStr)
 
 	// Set is waiting answers  
 	useEffect(() => {
@@ -30,7 +28,7 @@ const Test = (props) => {
 			setWaiting(result)
 		})
 	}, [user]) 
-
+	console.log(testObj)
 
 	const onChange = e => {
 		setformData({
@@ -100,7 +98,7 @@ const Test = (props) => {
 
 							<fieldset>
 								<div>
-									<h2 className="L1">{obj.title}</h2>
+									<h2 className="L1">{testObj.title}</h2>
 								</div>
 							</fieldset>
 
@@ -109,7 +107,7 @@ const Test = (props) => {
 
 							<fieldset>
 								<div className="parrafo-uno">
-									<p>{obj.description}</p>
+									<p>{testObj.description}</p>
 								</div>
 							</fieldset>
 
@@ -126,7 +124,7 @@ const Test = (props) => {
 
 							{/* Questions */}
 
-							{obj && obj.questions && obj.questions.map(elem => {
+							{testObj && testObj.questions && testObj.questions.map(elem => {
 								
 								{/* Reading text */}
 

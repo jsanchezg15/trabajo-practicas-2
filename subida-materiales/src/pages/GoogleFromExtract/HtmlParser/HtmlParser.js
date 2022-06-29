@@ -8,39 +8,29 @@ import 'semantic-ui-css/semantic.min.css';
 
 toast.configure()
 
-const getHTML = async (myUrl) => {
+const getHTML = async (test) => {
 	try {
 		// Asks the API REST for the HTML of the google form
 		// whose url has been introduced in the input text
 		// The url is send in the headers
 	
-		console.log(1)
+		const myUrl = test.formURL
 
 		const HOST =  process.env.HOST || "http://localhost:8080"
 
 		const resp = await fetch(HOST + "/getHtml", {headers: {url: myUrl}})
-		console.log(2)
-
 		const data = await resp.json()
-		console.log(3)
 
 
 		if(resp.status === 500) 
 			throw {message: "Internal server error"}
 		
-		console.log(4)
 
 		const publicLoadData = getPublicLoadData(data)
-		console.log(5)
 
 		let description = publicLoadData[0]
-		console.log(6)
-
 		let questions   = publicLoadData[1]
-		console.log(7)
-
 		let title       = publicLoadData[8] || extractTitle(data)
-		console.log(8)
 
 		questions = questions.map(quest => {
 			return {
@@ -52,18 +42,11 @@ const getHTML = async (myUrl) => {
 				options: quest[4] ? quest[4][0][1] : ""
 			}
 		})
-		console.log(9)
 
-		console.log({description, questions, title})
+		//console.log({description, questions, title})
 
-		await db.collection("tests").add({json: JSON.stringify({description, questions, title})})
-		console.log(10)
-
-		return {
-			description, 
-			questions, 
-			title
-		}
+		test.testObj     = { description, questions, title }
+		test.responseURL = createUrl(myUrl)
 	}	
 	catch(e) {
 		console.log(e)

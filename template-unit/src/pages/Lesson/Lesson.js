@@ -10,7 +10,7 @@ import './Lesson.scss'
 
 const Lesson = (props) => {
 	
-	let { title, slides, pdfURL, style} = props
+	let { title, slides, pdfURL } = props
 
 	const settings = {
 		dots: true,
@@ -42,7 +42,7 @@ const Lesson = (props) => {
 					</Slider>
 				}
 
-				{pdfURL && pdfURL != "null" &&
+				{pdfURL && pdfURL != "" && pdfURL != "null" && pdfURL != "undefinded" && pdfURL != null && pdfURL != undefined &&
 					<div class="center"> 
 						<Button href={pdfURL} download className="btn-download-uno">Download resources</Button>
 					</div>

@@ -18,6 +18,7 @@ const VideoInput = (props) => {
 		setData(obj)
 	}
 
+	
 
 	return (
 		<div className="main-video">

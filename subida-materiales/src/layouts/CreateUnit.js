@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { toast } from "react-toastify"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { v4 as uuidv4 } from 'uuid'
+import { storage, db } from "../pages/utils/Firebase/Firebase"
 import getHTML   from "../pages/GoogleFromExtract/HtmlParser/HtmlParser"
 
 // Components
@@ -18,10 +19,6 @@ const CreateUnit = (props) => {
 	const [tests,     setTests]   = useState([])
 	const [videos,    setVideos]  = useState([])
 
-	const handlerShowPassword = e => {
-
-	}
-
 	const onChange = e => {
 
 	}
@@ -36,10 +33,108 @@ const CreateUnit = (props) => {
 		console.log(tests)
 		console.log(videos)
 
-		/*const promises = tests.map(test => getHTML(test.formURL))
-		console.log("SENT")
-		await Promise.all(promises)
-		console.log("DONE")*/
+		await uploadImages()
+		await uploadTests()
+
+		const myLessons = lessons.map(lesson => {
+			return {
+				title:  lesson.title,
+				pdfURL: lesson.pdfURL || "", 
+				slides: lesson.urls
+			}
+		})
+
+		const myTests = tests.map(test => {
+			return {
+				title:       test.title,
+				testObj:     test.testObj,
+				answerLink:  test.spreadsheetURL,
+				responseURL: test.responseURL
+			}
+		})
+
+		const myVideos = []
+
+		const myUnit = {
+			title: "General Spanish U1",
+			lessons: myLessons,
+			tests:   myTests,
+			videos:  myVideos
+		}
+
+		const str = JSON.stringify(myUnit)
+
+		await db.collection("courses").add({json: str})
+	}
+
+
+	const uploadTests = async () => {
+
+		try {
+			const promises = tests.map(test => getHTML(test))
+
+			await Promise.all(promises)
+		}
+		catch(e) {
+			toast.error(e)
+		}
+	}
+
+	const uploadImages = async (title) => {
+		
+		try {
+			const ref = (title || "noReference") + "/"
+
+			const promises = lessons.map(lesson => postLessonImages(lesson, ref))
+			
+			await Promise.all(promises)
+		}
+		catch(e) {
+			toast.error(e)
+		}
+	}
+
+
+	const postLessonImages = async (lesson, ref) => {
+		
+		try {
+			const promises = lesson.files.map(image => postImage(image, ref + "/" + lesson.title + "/"))
+
+			await Promise.all(promises)
+
+			lesson.urls = lesson.files.map(elem => elem.url)
+
+			if(lesson.urls.includes(""))
+				throw "Some images have not been uploaded correctly"
+
+			toast.info(lesson.title + " files uploaded correctly")
+		}
+		catch(err) {
+			toast.error(err)
+		}
+		finally {
+			console.log(lessons)
+			//setImages([])
+			//setSearching(false)
+			//setProgress(0)
+		}
+	}
+
+	const postImage = async (image, ref) => {
+		try {
+			const uploadTask = await storage.ref(ref + image.id).put(image, {contentType: image.mimetype})
+			const imageURL   = await storage.ref(ref + image.id).getDownloadURL()
+
+			//setProgress(100 * ++uploadedImages / images.length)
+
+			if( !imageURL.includes("https://firebasestorage.googleapis.com") ) 
+				throw {message: "ERROR: The url is not correct..."}
+			
+			image.url = imageURL
+		}
+		catch(e) {
+			console.log(e.message || "Error uploading image")
+		}
 	}
 
 	const addLesson = () => {

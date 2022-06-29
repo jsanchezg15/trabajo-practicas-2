@@ -29,7 +29,7 @@ export default function Routes(props) {
 					<Route path={'/test/' + index} exact> 
 						<Test 
 							user={user} 
-							testStr={test.testStr} 
+							testObj={test.testObj} 
 							answerLink={test.answerLink} 
 							responseURL={test.responseURL}
 						/>

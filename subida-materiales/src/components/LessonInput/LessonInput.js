@@ -22,6 +22,19 @@ const LessonInput = (props) => {
 		setData(obj)
 	}
 
+	const onInputFile = e => {
+
+		if(e.target && e.target.files && e.target.files.length != 0) {
+
+			const obj = {
+				...data,
+				filePDF: e.target.files[0]
+			}
+
+			setData(obj)
+		}
+	}
+
 	useEffect(() => {
 		
 		const obj = {
@@ -60,8 +73,9 @@ const LessonInput = (props) => {
 						type="file"
 						name="pdfURL"
 						placeholder="PDF File"
-						onChange={e => onChange(e)}
-						icon="file"
+						accept="application/pdf"
+						onInput={e => onInputFile(e)}
+						icon="file pdf"
 					/>
 				</div>
 			}
