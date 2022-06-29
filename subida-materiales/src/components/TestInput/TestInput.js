@@ -29,6 +29,7 @@ const TestInput = (props) => {
 					type="text"
 					name="title"
 					value={data.title}
+					onChange={e => onChange(e)}
 					placeholder="Título"
 				/>
 			</div>
@@ -38,6 +39,7 @@ const TestInput = (props) => {
 					type="text"
 					name="formURL"
 					value={data.formURL}
+					onChange={e => onChange(e)}
 					placeholder="form url"
 					icon="linkify"
 				/>
@@ -48,6 +50,7 @@ const TestInput = (props) => {
 					type="text"
 					name="spreadsheetURL"
 					value={data.spreadsheetURL}
+					onChange={e => onChange(e)}
 					placeholder="spreadsheet url"
 					icon="file excel outline"
 				/>

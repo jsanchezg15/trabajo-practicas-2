@@ -304,9 +304,9 @@ const getSampleCourse = () => {
 			},
 			{
 				title: 'Final Test',
-				testStr: "    ",
-				answerLink:  "    ",
-				responseURL: "    "
+				testStr: '{"description":"Este es el segundo test de la unidad","questions":[{"label":1648629953,"legend":"Hola ¿cómo te llamas?","text":null,"type":"text","entry":595604424,"options":null},{"label":1599676364,"legend":"Elige tres colores","text":null,"type":"checkbox","entry":361289088,"options":[["Rojo",null,null,null,0],["Verde",null,null,null,0],["Amarillo",null,null,null,0],["Azul",null,null,null,0],["Morado",null,null,null,0],["Negro",null,null,null,0],["Blanco",null,null,null,0]]},{"label":2111586835,"legend":"Menú desplegable","text":null,"type":"dropdown","entry":1185583174,"options":[["Opción 1",null,null,null,0],["Opción 2",null,null,null,0],["Opción 3",null,null,null,0],["Opción 4",null,null,null,0]]}],"title":"Test 2"}',
+				answerLink:  "https://docs.google.com/spreadsheets/d/11wWGJk386dt9TTrhQVSpxFj7kwc-HSKGYg99E_BhATE/edit?resourcekey#gid=37922101",
+				responseURL: "https://docs.google.com/forms/d/e/1FAIpQLScU8HEaqAgw406cX1lYTv7y7NGFnYoht_7HJqrtmc85xF1Jlg/formResponse"
 			}
 		]
 	}

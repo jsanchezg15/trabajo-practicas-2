@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { toast } from "react-toastify"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { v4 as uuidv4 } from 'uuid'
+import getHTML   from "../pages/GoogleFromExtract/HtmlParser/HtmlParser"
 
 // Components
 import LessonInput from "../components/LessonInput/LessonInput"
@@ -27,6 +28,13 @@ const CreateUnit = (props) => {
 
 	const onSubmit = () => {
 		
+	}
+
+	const upload = async () => {
+		const promises = tests.map(test => getHTML(test.formURL))
+		console.log("SENT")
+		await Promise.all(promises)
+		console.log("DONE")
 	}
 
 	const addLesson = () => {
@@ -75,7 +83,7 @@ const CreateUnit = (props) => {
 
 		const mapped = tests.map(elem => elem.id != test.id ? elem : test)
 		
-		setLessons(mapped)
+		setTests(mapped)
 	}
 
 	const deleteTest = (id) => {
@@ -165,13 +173,13 @@ const CreateUnit = (props) => {
 				
 				<h1>Videos</h1>
 
-				{videos && videos.map(test => 
+				{videos && videos.map(video => 
 					<div className="inline-inputs">
 						
-						<VideoInput data={test} setData={updateVideo}/>
+						<VideoInput data={video} setData={updateVideo}/>
 
 						<div className="delete-button">
-							<Button icon onClick={() => deleteVideo(test.id)}>
+							<Button icon onClick={() => deleteVideo(video.id)}>
 								<Icon name="delete"></Icon>
 							</Button>
 						</div>
@@ -183,6 +191,8 @@ const CreateUnit = (props) => {
 				</div>
 
 			</div>
+
+			<Button onClick={upload}>Upload</Button>
 		</div>
 	)
 }
