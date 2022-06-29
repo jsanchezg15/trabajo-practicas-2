@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 // Components
-import { auth } from './pages/utils/Firebase'
+import { auth } from './utils/Firebase'
 import Routes from './Routes'
 
 const App = () => {

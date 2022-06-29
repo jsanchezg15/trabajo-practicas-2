@@ -1,13 +1,8 @@
 import React from 'react'
-import {
-	BrowserRouter,
-	Switch,
-	Route,
-	Redirect
-} from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 // Components
-import CreateUnit from '../layouts/CreateUnit'
+import CreateUnit from '../pages/CreateUnit/CreateUnit'
 import Auth from '../pages/Auth/page/Auth/Auth'
 
 const MyRouter = (props) => {

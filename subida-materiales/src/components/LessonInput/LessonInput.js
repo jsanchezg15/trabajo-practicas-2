@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
-import MyDropzone from "../../pages/UploadImagesFirebase/page/MyDropzone"
+import MyDropzone from "../MyDropzone"
 
 import "./LessonInput.scss"
 

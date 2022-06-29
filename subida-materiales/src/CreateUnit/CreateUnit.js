@@ -2,13 +2,13 @@ import React, { useState } from "react"
 import { toast } from "react-toastify"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { v4 as uuidv4 } from 'uuid'
-import { storage, db } from "../pages/utils/Firebase/Firebase"
+import { storage, db } from "../../utils/Firebase/Firebase"
 import getHTML   from "../pages/GoogleFromExtract/HtmlParser/HtmlParser"
 
 // Components
-import LessonInput from "../components/LessonInput/LessonInput"
-import TestInput   from "../components/TestInput/TestInput"
-import VideoInput  from "../components/VideoInput/VideoInput"
+import LessonInput from "../../components/LessonInput/LessonInput"
+import TestInput   from "../../components/TestInput/TestInput"
+import VideoInput  from "../../components/VideoInput/VideoInput"
 
 // Styles
 import "./CreateUnit.scss"
@@ -71,8 +71,15 @@ const CreateUnit = (props) => {
 		}
 
 		const str = JSON.stringify(myUnit)
+		const id  = uuidv4()
 
-		await db.collection("courses").add({json: str})
+		await db.collection("courses").add({
+			id: id,
+			title: title,
+			str: str
+		})
+
+		toast.success("¡Materiales subidos!")
 	}
 
 
@@ -125,7 +132,7 @@ const CreateUnit = (props) => {
 			lesson.urls = lesson.files.map(elem => elem.url)
 
 			if(lesson.urls.includes(""))
-				throw "Some images have not been uploaded correctly"
+				throw "ERROR: La url pude no ser correcta..."
 
 			
 			if(lesson.filePDF && lesson.filePDF != "") {
@@ -136,13 +143,10 @@ const CreateUnit = (props) => {
 				const reference  = await storage.ref(ref + "/" + lesson.title + "/" + id).getDownloadURL()
 		
 				if( !reference.includes("https://firebasestorage.googleapis.com") ) 
-					throw {message: "ERROR: The url is not correct..."}
+					throw "ERROR: La url pude no ser correcta..."
 				
 				lesson.pdfURL = reference
 			}
-
-
-			toast.info(lesson.title + " files uploaded correctly")
 		}
 		catch(err) {
 			toast.error(err)

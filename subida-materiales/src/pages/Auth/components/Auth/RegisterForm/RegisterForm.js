@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 
 // data base
-import { firebase } from "../../../../utils/Firebase"
+import { firebase } from "../../../../../utils/Firebase"
 import "firebase/auth"
 import 'firebase/firestore'
 

@@ -1,4 +1,4 @@
-@import "../scss/index.scss";
+@import "../../scss/index.scss";
 
 .main {
 	margin-top: 50px;
@@ -6,7 +6,6 @@
 	.container {
 		width: 800px;
 		height: fit-content;
-		//border: 2px solid $border-grey-light;
 
 		display: flex;
 		flex-direction: column;

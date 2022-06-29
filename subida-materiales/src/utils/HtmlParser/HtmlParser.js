@@ -1,10 +1,4 @@
 import { toast } from 'react-toastify'
-import { v4 as uuidv4 } from 'uuid'
-import { db } from '../../utils/Firebase'
-
-
-// Styles
-import 'semantic-ui-css/semantic.min.css';
 
 toast.configure()
 
@@ -42,8 +36,6 @@ const getHTML = async (test) => {
 				options: quest[4] ? quest[4][0][1] : ""
 			}
 		})
-
-		//console.log({description, questions, title})
 
 		test.testObj     = { description, questions, title }
 		test.responseURL = createUrl(myUrl)

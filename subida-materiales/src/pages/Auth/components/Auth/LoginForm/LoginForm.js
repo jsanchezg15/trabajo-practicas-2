@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
-//import validateEmail from "../../../utils/Validations"
-import { firebase } from "../../../../utils/Firebase"
+import { firebase } from "../../../../../utils/Firebase"
 import "firebase/auth"
 
 import "./LoginForm.scss"

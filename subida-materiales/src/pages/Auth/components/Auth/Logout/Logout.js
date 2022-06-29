@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from "semantic-ui-react"
-import firebase from "../../../utils/Firebase"
+import { firebase } from "../../../../../utils/Firebase"
 import "firebase/auth"
 
 import "./Logout.scss"
