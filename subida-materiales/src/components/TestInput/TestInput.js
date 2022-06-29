@@ -15,7 +15,6 @@ const TestInput = (props) => {
 			[e.target.name]: e.target.value
 		}
 
-		console.log(obj)
 		setData(obj)
 	}
 

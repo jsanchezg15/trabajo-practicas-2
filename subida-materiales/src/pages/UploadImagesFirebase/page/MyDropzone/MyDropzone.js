@@ -11,7 +11,7 @@ toast.configure()
 
 const MyDropzone = (props) => {
 	
-	const setImages = props.setImages
+	const { setFiles } = props
 
 	const onDrop = useCallback(acceptedFiles => {
 		
@@ -28,7 +28,7 @@ const MyDropzone = (props) => {
 			toast.warning("Error. Images may be messy")
 		}
 
-		setImages(acceptedFiles)
+		setFiles(acceptedFiles)
 
 	}, [])
 	  
@@ -38,7 +38,7 @@ const MyDropzone = (props) => {
 	return (
 		<div className="dropzone" {...getRootProps()}>
 		  	<input {...getInputProps()}/>
-			<p className="dropzone__text">{isDragActive ? "Drop the files here..." : "Drag and drop some files here, or click to select files"}</p>
+			<p className="dropzone__text">{isDragActive ? "Introduce..." : "Introduce las imágenes aquí"}</p>
 		</div>
 	)
 }

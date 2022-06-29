@@ -31,10 +31,15 @@ const CreateUnit = (props) => {
 	}
 
 	const upload = async () => {
-		const promises = tests.map(test => getHTML(test.formURL))
+
+		console.log(lessons)
+		console.log(tests)
+		console.log(videos)
+
+		/*const promises = tests.map(test => getHTML(test.formURL))
 		console.log("SENT")
 		await Promise.all(promises)
-		console.log("DONE")
+		console.log("DONE")*/
 	}
 
 	const addLesson = () => {

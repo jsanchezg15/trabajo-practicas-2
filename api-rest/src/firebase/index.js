@@ -17,6 +17,4 @@ const auth    = firebase.auth()
 const storage = firebase.storage()
 const db      = firebase.firestore()
 
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-
 module.exports = { app, auth, storage, db, firebase }
