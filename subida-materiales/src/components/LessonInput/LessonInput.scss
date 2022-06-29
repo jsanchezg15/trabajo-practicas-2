@@ -1,0 +1,88 @@
+@import "../../scss/index.scss";
+
+.main-lesson {
+
+	border: 2px solid $border-grey-light;
+	border-radius: 10px;
+	margin: 10px;
+	padding: 5px;
+	width: 700px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.ui.input {
+		width: 100%;
+
+		input {
+			background-color: $background-grey;
+			border: 0;
+			font-size: 16px;
+			color: $font-light;
+	
+			&:hover,
+			&:active,
+			&:focus {
+				background-color: $background-grey-hover;
+				border: 0;
+			}
+
+			file-upload-button {
+				background-color: red;
+			}
+		}
+	
+		i {
+			color: $font-light;
+			font-size: 19px;
+		}
+			
+		&.error {
+			input {
+				border-bottom: 1px solid $danger;
+			}
+		}
+	}
+
+	.inline {
+		margin: 10px;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	
+		.ui.input {
+			width: 60%;
+		}
+	}
+
+	.pdf-input {
+		margin: 10px;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		.ui.input {
+			width: 95%;
+		}
+	}
+
+	.ui.button {
+		text-transform: uppercase;
+        width: 30%;
+        border-radius: 50px;
+        font-size: 17px;
+        letter-spacing: 3px;
+		color: white;
+		background-color: $primary-color-orange;
+	}
+
+	.dropzone {
+		width: 95%;
+		margin: 10px;
+	}
+}
+

@@ -1,20 +1,16 @@
 import React, { useState } from "react"
 import { Button, Icon, Form, Input } from "semantic-ui-react"
 import { toast } from "react-toastify"
+import LessonInput from "../components/LessonInput/LessonInput"
+import TestInput from "../components/TestInput/TestInput"
+import { v4 as uuidv4 } from 'uuid'
 
 import "./CreateUnit.scss"
 
 const CreateUnit = (props) => {
 
-	const { setSelectedForm } = props
-
-	const [showPassword, setShowPassword] = useState(false)
-	const [formData,     setFormData]     = useState({email: "", password: ""})
-	const [formError,    setFormError]    = useState({})
-	const [isLoading,    setIsLoading]    = useState(false)
-	const [userActive,   setUserActive]   = useState(true)
-	const [user,         setUser]         = useState(null)
-
+	const [lessons,   setLessons]   = useState([])
+	const [tests,     setTests]     = useState([])
 
 	const handlerShowPassword = e => {
 
@@ -28,56 +24,86 @@ const CreateUnit = (props) => {
 		
 	}
 
+	const addLesson = () => {
+
+		const copy = [
+			...lessons,
+			{id: uuidv4()}
+		]
+
+		setLessons(copy)
+	}
+
+	const deleteLesson = (id) => {
+
+		console.log(lessons)
+		const copy = lessons.filter(elem => elem.id !== id)
+		console.log(copy)
+		setLessons(copy)
+	}
+
+	const addTest = () => {
+
+		const copy = [
+			...tests,
+			{id: uuidv4()}
+		]
+
+		setTests(copy)
+	}
+
+	const deleteTest = (id) => {
+
+		const copy = tests.filter(elem => elem.id !== id)
+
+		setTests(copy)
+	}
+
 	return (
 		<div className="main">
-			<h1>Spanish courses for all</h1>
+			
+			<div className="container">
+				<h1>Lecciones</h1>
 
-			<Form onSubmit={onSubmit} onChange={onChange}>
-				
-				<Form.Field>
-					<Input
-						type="text"
-						name="email"
-						placeholder="email"
-						icon="mail outline"
-						error={formError.email}
-					/>
-					{formError.email && <span className="error-text"> Please give a valid email. </span>}
-				</Form.Field>
-				
-				<Form.Field>
-					<Input
-						type={showPassword ? "text" : "password"}
-						name="password"
-						placeholder="password"
-						error={formError.password}
-						icon={
-							<Icon
-								name={"eye" + showPassword ? " slash outline" : ""}
-								link
-								onClick={handlerShowPassword}
-							/>
-						}
-					/>
-					{formError.password && <span className="error-text"> Please insert a password greatter than 5 characters. </span>}
-				</Form.Field>
-
-				<Button className="login "type="submit" loading={isLoading}>
-					Log in
-				</Button>
-
-				<Button className="change "type="submit" onClick={() => setSelectedForm("reset")}>
-					Forgot password?
-				</Button>
-			</Form>
-
-			<div className="login-form__options">
-				<p onClick={() => setSelectedForm(null)}>Back</p>
-				<p>
-					I don´t have a Comligo account{" "}
-					<span onClick={() => setSelectedForm("register")}>Register</span>
-				</p>
+				{lessons && lessons.map(lesson => 
+					<div className="inline-inputs">
+						
+						<LessonInput/>
+						
+						<div className="delete-button">
+							<Button icon onClick={() => deleteLesson(lesson.id)}>
+								<Icon name="delete"></Icon>
+							</Button>
+						</div>
+					</div>
+				)}
+					
+				<div className="buttons">
+					<div className="add-button">
+						<Button icon onClick={addLesson}>
+							<Icon name="add"></Icon>
+						</Button>
+					</div>
+				</div>
 			</div>
+
+			<h1>Tests</h1>
+
+			{tests && tests.map(test => <TestInput num={test.num}/>)}
+			
+			<div className="buttons">
+				<div className="add-button">
+					<Button icon onClick={addTest}>
+						<Icon name="add"></Icon>
+					</Button>
+				</div>
+				<div className="delete-button">
+					<Button icon onClick={deleteTest}>
+						<Icon name="delete"></Icon>
+					</Button>
+				</div>
+			</div>
+
 		</div>
 	)
 }

@@ -32,7 +32,7 @@ const MyDropzone = (props) => {
 
 	}, [])
 	  
-	const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop}) 
+	const { getRootProps, getInputProps, isDragActive } = useDropzone( { onDrop } ) 
 
 	
 	return (
