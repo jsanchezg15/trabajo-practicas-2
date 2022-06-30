@@ -185,21 +185,28 @@ const Test = (props) => {
 
 								if(elem.type === "dropdown") {
 									return (
-										<select name={"entry." + elem.entry}>
-										<option disabled hidden selected>Choose an option</option>
-										
-										{elem.options && elem.options.map(opt => 
-											<option value={opt[0]} required>  {opt[0]}  </option>
-										)}
-
-										</select>
+										<fieldset>
+											<legend for={elem.label} className={"leyenda"}>{elem.legend}</legend>
+												<select name={"entry." + elem.entry}>
+													<option disabled hidden selected>Choose an option</option>
+													
+													{elem.options && elem.options.map(opt => 
+														<option value={opt[0]} required>  {opt[0]}  </option>
+													)}
+												</select>
+										</fieldset>
 									)
 								}
 							
 								{/* Text inputs */}
 								
 								if(elem.type === "text" || elem.type === "paragraph") 
-									return <input name={"entry." + elem.entry} type="text" className={elem.type}/>
+									return (
+										<fieldset>
+											<legend for={elem.label} className={"leyenda"}>{elem.legend}</legend>
+											<input name={"entry." + elem.entry} type="text" className={elem.type}/>
+										</fieldset>
+									)
 							})}
 					
 							<input type="hidden" name="fvv" value="1"/>
